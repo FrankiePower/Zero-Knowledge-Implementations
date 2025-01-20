@@ -1,4 +1,4 @@
-//use the sparse and the dense representation of polynomials
+/* //use the sparse and the dense representation of polynomials
 struct Monomial {
     coefficient: usize,
     degree: usize,
@@ -27,4 +27,22 @@ fn main() {
     let result = poly.evaluate(5);
     println!("The polynomial evaluated at x=5 is: {}", result);
     println!("The degree of the polynomial is: {}", poly.degree());
+}
+
+    use sparse rep, dense rep, use generics too, evaluate with for loop and without
+ */
+
+struct UnivariatePoly {
+    // 1 coeffiecient for each power of x
+    coefficient: Vec<f64>,
+}
+
+impl UnivariatePoly {
+    fn degree(&self) -> usize {
+        self.coefficient.len() - 1
+    }
+
+    fn evaluate(&self, x: f64) -> f64 [
+        
+    ]
 }
