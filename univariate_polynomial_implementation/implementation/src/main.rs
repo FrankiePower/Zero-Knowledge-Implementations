@@ -1,12 +1,6 @@
-// implementation with sparse rep
-// implementation with dense rep
-// use generics too
-// evaluate with for loop and without
-// interpolation
-
 use std::collections::HashMap;
 use std::io;
-use std::ops::{Add, Div, Mul, Sub};
+use std::ops::{Add, Mul};
 
 // Sparse Representation: Only stores the non-zero terms
 struct SparsePolynomial<T> {
@@ -49,30 +43,6 @@ impl<T: Copy + Add<Output = T> + Mul<Output = T> + Default + From<u8>> DensePoly
     }
 }
 
-// Lagrange Interpolation: Given points (x_i, y_i), find f(x)
-fn lagrange_interpolation<T>(points: &[(T, T)], x: T) -> T
-where
-    T: Copy
-        + Default
-        + Add<Output = T>
-        + Mul<Output = T>
-        + Mul<Output = T>
-        + Sub<Output = T>
-        + Div<Output = T>,
-{
-    let mut result = T::default();
-    for (i, &(xi, yi)) in points.iter().enumerate() {
-        let mut term = yi;
-        for (j, &(xj, _)) in points.iter().enumerate() {
-            if i != j {
-                term = term * ((x - xj) / (xi - xj));
-            }
-        }
-        result = result + term;
-    }
-    result
-}
-
 fn main() {
     // Example: 3x^2 + 2x + 5 in both representations
     let sparse_poly = SparsePolynomial {
@@ -96,16 +66,3 @@ fn main() {
     println!("Sparse polynomial evaluates to:{}", sparse_poly.evaluate(x));
     println!("Dense polynomial evaluates to:{}", dense_poly.evaluate(x));
 }
-
-/*
-
-// 2 functions (evaluate and interpolate)
-
-// f(x) = y
-
-// [1,2], [2,3]
-
-// how do we represent 5 , 2x + 5 , 3x^2 + 2x + 5
-
-
- */
