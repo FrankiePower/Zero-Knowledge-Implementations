@@ -1,5 +1,13 @@
 fn main() {
-    // dense representation of a polynomial i.e. The dense representation uses an array (or list) where each index corresponds to a power of x, and the value at that index is the coefficient for that power. This format assumes all powers up to the highest degree are present, even if some coefficients are zero.
+    dense();
+    println!();
+    println!();
+    sparse();
+    println!();
+}
+
+fn dense() {
+    // Dense representation of a polynomial i.e. The dense representation uses an array (or list) where each index corresponds to a power of x, and the value at that index is the coefficient for that power. This format assumes all powers up to the highest degree are present, even if some coefficients are zero.
 
     // Polynomial: 5x^3 + 0x^2 + 2x + 7
 
@@ -20,12 +28,6 @@ fn main() {
             }
         }
     }
-
-    println!();
-
-    // sparse representation of a polynomial
-
-    sparse();
 }
 
 fn sparse() {
