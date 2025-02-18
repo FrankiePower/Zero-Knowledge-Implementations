@@ -1,2 +1,5 @@
 /implementation/target
 /representation/target
+learning
+.gitignore
+/implementation/Cargo.lock
