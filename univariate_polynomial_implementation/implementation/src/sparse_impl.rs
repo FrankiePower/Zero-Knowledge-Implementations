@@ -25,4 +25,12 @@ impl<F: PrimeField> SparseUnivariatePoly<F> {
             self.coefficients.insert(degree, coeff);
         }
     }
+
+    pub fn evaluate(&self, value: F) -> F {
+        let mut result = F::zero();
+        for (degree, coeff) in &self.coefficients {
+            result += value.pow(&[*degree as u64]) * *coeff;
+        }
+        result
+    }
 }
