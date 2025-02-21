@@ -23,22 +23,6 @@ For this implementation, the latitude and longitude of Fiji (17.7134° S, 178.06
 4. **Distribute Shares**: The shares are distributed to different participants (e.g., friends).
 5. **Reconstruction**: A minimum of 3 shares (for both latitude and longitude) are required to reconstruct the original coordinates using Lagrange interpolation.
 
-## Example Usage
-
-```rust
-// Encode coordinates
-let (lt, ln) = encode_location(17.7134, 178.0650);
-
-// Generate shares
-let shares = generate_shares(lt, ln, 7, 3);
-
-// Reconstruct secret (using any 3 shares)
-let (decoded_lt, decoded_ln) = reconstruct_secret(&shares[0..3]);
-
-// Decode coordinates
-let (latitude, longitude) = decode_location(decoded_lt, decoded_ln);
-```
-
 ## Benefits
 
 - **Privacy**: The secret (latitude and longitude) can only be reconstructed when enough shares are combined.
