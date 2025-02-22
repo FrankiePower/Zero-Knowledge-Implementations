@@ -43,6 +43,14 @@ mod test {
         let mut transcript: Transcript = Transcript::new(); // Initializes a new transcript
         transcript.append("zero knowledge".as_bytes()); // Appends the string to the transcript
         let random_challenge: Fq = transcript.get_random_challenge();
-        dbg!(random_challenge);
+        println!("{:?}", random_challenge);
+    }
+
+    #[test]
+    fn example_usage() {
+        let mut transcript: Transcript = Transcript::new(); // Initializes a new transcript
+        transcript.append("example data".as_bytes()); // Appends the string to the transcript
+        let random_challenge: Fq = transcript.get_random_challenge();
+        println!("{:?}", random_challenge);
     }
 }
