@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../multilinear_polynomial"
+    },
+    {
+      "path": "../../fiat_shamir_transcript"
+    }
+  ],
+  "settings": {}
+}
