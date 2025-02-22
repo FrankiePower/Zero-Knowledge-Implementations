@@ -1,30 +1,27 @@
 use ark_bn254::Fq;
 use ark_ff::{BigInteger, PrimeField};
 use sha3::{Digest, Keccak256};
-use std::marker::PhantomData;
 
 #[derive(Clone)]
-pub struct Transcript<F: PrimeField> {
-    _field: PhantomData<F>, // PhantomData ensures type safety without storing actual data
-    hasher: Keccak256,      // Hasher instance for accumulating transcript data
+pub struct Transcript {
+    hasher: Keccak256,
 }
 
-impl<F: PrimeField> Transcript<F> {
+impl Transcript {
     pub fn new() -> Self {
         Self {
-            _field: PhantomData,
             hasher: Keccak256::new(),
         }
     }
 
     pub fn append(&mut self, preimage: &[u8]) {
-        self.hasher.update(preimage) // Updates the  hash state with input data
+        self.hasher.update(preimage);
     }
 
-    pub fn get_random_challenge(&mut self) -> F {
-        let random_challenge = self.hasher.finalize_reset(); // Computes the hash and resets state
-        self.append(&random_challenge); // Re-appends the hash output to maintain continuity
-        F::from_le_bytes_mod_order(&random_challenge) // Converts hash output into a field element
+    pub fn get_random_challenge<F: PrimeField>(&mut self) -> F {
+        let random_challenge = self.hasher.finalize_reset();
+        self.append(&random_challenge);
+        F::from_le_bytes_mod_order(&random_challenge)
     }
 }
 
@@ -43,9 +40,9 @@ mod test {
 
     #[test]
     fn it_hashes() {
-        let mut transcript: Transcript<Fq> = Transcript::new(); // Initializes a new transcript
+        let mut transcript: Transcript = Transcript::new(); // Initializes a new transcript
         transcript.append("zero knowledge".as_bytes()); // Appends the string to the transcript
-        let random_challenge = transcript.get_random_challenge();
+        let random_challenge: Fq = transcript.get_random_challenge();
         dbg!(random_challenge);
     }
 }
