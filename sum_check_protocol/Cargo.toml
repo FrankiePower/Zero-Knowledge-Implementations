@@ -1,0 +1,12 @@
+[package]
+name = "sum_check_protocol"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fiat_shamir_transcript = { path = "../fiat_shamir_transcript"}
+multilinear_polynomial = { path = "../multilinear_polynomial" }
+ark-ff = "0.5.0"
+ark-bn254 = "0.5.0"
+ark-bls12-381 = "0.5.0"
+rand = "0.8.5"
