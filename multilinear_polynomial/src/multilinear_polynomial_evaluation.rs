@@ -1,4 +1,4 @@
-use ark_ff::PrimeField;
+use ark_ff::{BigInteger, PrimeField};
 use std::ops::{Add, Mul};
 
 #[derive(Clone, Debug, PartialEq)]
@@ -19,6 +19,11 @@ impl<F: PrimeField> MultilinearPoly<F> {
             evaluation: evaluations,
             num_of_vars,
         }
+    }
+
+    /// Returns the number of variables in the multilinear polynomial.
+    pub fn number_of_variables(&self) -> usize {
+        self.num_of_vars
     }
 
     fn pair_points(bit: usize, num_of_vars: usize) -> Vec<(usize, usize)> {
@@ -55,6 +60,16 @@ impl<F: PrimeField> MultilinearPoly<F> {
         }
 
         poly
+    }
+
+    pub fn convert_to_bytes(&self) -> Vec<u8> {
+        let mut bytes = Vec::new();
+
+        for value in &self.evaluation {
+            bytes.extend(value.into_bigint().to_bytes_be());
+        }
+
+        bytes
     }
 
     pub fn evaluate(&self, values: Vec<F>) -> F {
